@@ -1,15 +1,19 @@
 #include <iostream>
-
 #include <string>
 
 using namespace std;
+// Funcion para la resolucion de una ecuacion de segundo grado
+// Parametros: valor (A), valor (B), valor (C), signo (A), signo (B), signo (C)
+int segundoGrado(int a_p, int b_p, int c_p, char a_s, char b_s, char c_s) {
+  // cout << a_p << "\n";
+  // cout << b_p << "\n";
+  // cout << c_p << "\n";
+  if(a_s=='-'){a_s=NULL;}
+  if(b_s=='-'){b_s=NULL;}
+  if(c_s=='-'){c_s=NULL;}
 
-int segundoGrado(int a_p, int b_p, int c_p) {
-  cout << a_p << "\n";
-  cout << b_p << "\n";
-  cout << c_p << "\n";
-
-
+  cout << "Ecuacion: " <<a_s<<a_p<<"x^2"<<b_s<<b_p<<"x"<<c_s<<c_p<<endl; 
+  int res;
 }
 
 char extr_signo(string cadena) {
@@ -66,7 +70,8 @@ int main() {
       cout << "Ingresa el valor de 'A': " << endl;
       cin >> a;
       // extr_signo(a);
-      (extr_signo(a) == '+' || extr_signo(a) == '-') ? acceso_signo = true: acceso_signo = false;
+      char sign_a = extr_signo(a);
+      (sign_a == '+' || sign_a == '-') ? acceso_signo = true: acceso_signo = false;
       /*
           if(extr_signo(a)=='-' || extr_signo(a)=='+'){
             cout << "GENIAL" << endl ;
@@ -76,11 +81,14 @@ int main() {
       */
       cout << "Ingresa el valor de 'B': " << endl;
       cin >> b;
-      (extr_signo(b) == '+' || extr_signo(b) == '-') ? acceso_signo = true: acceso_signo = false;
+      char sign_b = extr_signo(b);
+      (sign_b == '+' || sign_b == '-') ? acceso_signo = true: acceso_signo = false;
+
       cout << "Ingresa el valor de 'C': " << endl;
       cin >> c;
+      char sign_c = extr_signo(c);
       // extr_signo(c);
-      (extr_signo(c) == '+' || extr_signo(c) == '-') ? acceso_signo = true: acceso_signo = false;
+      (sign_c == '+' || sign_c == '-') ? acceso_signo = true: acceso_signo = false;
 
       // Re-asignación de valor (ya en numerico)
       int a_num = stoi(a);
@@ -93,7 +101,7 @@ int main() {
           // LLAMADOS
           // Llave de fin de bucle
           acceso = true;
-          segundoGrado(a_num, b_num, c_num);
+          segundoGrado(a_num, b_num, c_num, sign_a, sign_b, sign_c);
         }
       }else{
         cout << "INGRESE UN SIGNO POR FAVOR" << endl;

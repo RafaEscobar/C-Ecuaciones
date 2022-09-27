@@ -91,15 +91,16 @@ int main() {
       // Variables de ingreso
       string a, b, c;
       // Puerta de acceso para existencia de signos
-      bool acceso_signo;
+      bool acceso_a, acceso_b, acceso_c;
       // Mensaje de solicitud de ingreso de valor.
       // Ingreso de valor
       cout << "Ingresa el valor de 'A': " << endl;
       cin >> a;
       // Almacenamos en una variable el signo retornado
       char sign_a = extr_signo(a);
+      (sign_a == '+' || sign_a == '-') ? acceso_a = true: acceso_a = false;
+      (acceso_a==true) ? sign_a = extr_signo(a) : sign_a='#';
       // Operador ternario de comprobacion de existencia de signo
-      (sign_a == '+' || sign_a == '-') ? acceso_signo = true: acceso_signo = false;
       /*
           if(extr_signo(a)=='-' || extr_signo(a)=='+'){
             cout << "GENIAL" << endl ;
@@ -112,22 +113,23 @@ int main() {
       // Almacenamos en una variable el signo retornado
       char sign_b = extr_signo(b);
       // Operador ternario de comprobacion de existencia de signo
-      (sign_b == '+' || sign_b == '-') ? acceso_signo = true: acceso_signo = false;
-
+      (sign_b == '+' || sign_b == '-') ? acceso_b = true: acceso_b = false;
+      (acceso_b==true) ? sign_b = extr_signo(b) : sign_b='#';
       cout << "Ingresa el valor de 'C': " << endl;
       cin >> c;
       // Almacenamos en una variable el signo retornado
       char sign_c = extr_signo(c);
       // extr_signo(c);
       // Operador ternario de comprobacion de existencia de signo
-      (sign_c == '+' || sign_c == '-') ? acceso_signo = true: acceso_signo = false;
+      (sign_c == '+' || sign_c == '-') ? acceso_c = true: acceso_c = false;
+      (acceso_c==true) ? sign_c = extr_signo(c) : sign_c='#';
 
       // Re-asignación de valor (ya en numerico)
       int a_num = stoi(a);
       int b_num = stoi(b);
       int c_num = stoi(c);
       //cout << "Valor:" a_num << std::endl;
-      if (acceso_signo == true) {
+      if (acceso_a == true && acceso_b==true && acceso_c==true) {
         // Condicional -SI LA CONVERSION A NUMERICO ES CORRECTA-
         if (0 / a_num == 0 && 0 / b_num == 0 && 0 / c_num == 0) {
           // LLAMADOS

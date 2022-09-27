@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 
 using namespace std;
 // Funcion para la resolucion de una ecuacion de segundo grado
 // Parametros: valor (A), valor (B), valor (C), signo (A), signo (B), signo (C)
-int segundoGrado(int a_p, int b_p, int c_p, char a_s, char b_s, char c_s) {
+int segundoGrado(double a_p, double b_p, double c_p, char a_s, char b_s, char c_s) {
   // cout << a_p << "\n";
   // cout << b_p << "\n";
   // cout << c_p << "\n";
@@ -16,7 +17,13 @@ int segundoGrado(int a_p, int b_p, int c_p, char a_s, char b_s, char c_s) {
 
   // Mostramos por consola la ecuacion
   cout << "Ecuacion: " <<a_s<<a_p<<"x^2"<<b_s<<b_p<<"x"<<c_s<<c_p<<endl; 
-  int res;
+  double res1 = -(b_p) + (sqrt((pow(b_p,2))-((4*a_p)*c_p)));
+  res1 = (res1)/(2*a_p);
+  double res2 = -(b_p) - (sqrt((pow(b_p,2))-((4*a_p)*c_p)));
+  res2 = (res2)/(2*a_p);
+  cout << "------------"<< endl;
+  cout << "R1: " << res1 << endl;
+  cout << "R2: " << res2 << endl;
 }
 
 char extr_signo(string cadena) {
@@ -135,7 +142,7 @@ int main() {
     } catch (...) { // Bloque excepciC3n (VALOR INGRESADO NO ES NUMERICO)
       cout << "No se ingresaron valores numericos" << endl;
     }
-    // Condicional WHILE
+    // Condicional WHILE  
   } while (acceso == false);
   return 0;
 }

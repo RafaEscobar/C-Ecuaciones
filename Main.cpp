@@ -3,6 +3,8 @@
 #include <cmath>
 
 using namespace std;
+
+
 // Funcion para la resolucion de una ecuacion de segundo grado
 // Parametros: valor (A), valor (B), valor (C), signo (A), signo (B), signo (C)
 int segundoGrado(double a_p, double b_p, double c_p, char a_s, char b_s, char c_s) {

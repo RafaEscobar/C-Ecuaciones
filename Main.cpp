@@ -4,6 +4,31 @@
 
 using namespace std;
 
+// Funcion para la resolucion de una ecuacion de segundo grado
+// Parametros: valor (A), valor (B), valor (C), signo (A), signo (B), signo (C)
+int primerGrado(double a_p, double b_p, char a_s, char b_s) {
+  // cout << a_p << "\n";
+  // cout << b_p << "\n";
+
+  // Eliminación del signo en caso de ser negativo (Evitamos repeticion)
+  if (a_s == '-') {
+    a_s = NULL;
+  }
+  if (b_s == '-') {
+    b_s = NULL;
+  }
+
+  cout << "Ecuacion: " << a_s << a_p << "x" << b_s << b_p << endl;
+  if(a_p != 0){
+    double res = (-1*b_p)/(a_p);
+    cout << "Resultado: " << res << endl;
+  }else if(b_p != 0){
+    cout<< "Solucion imposible " << endl;
+  }else{
+    cout<< "Solucion indeterminada" << endl;
+  }
+}
+
 
 // Funcion para la resolucion de una ecuacion de segundo grado
 // Parametros: valor (A), valor (B), valor (C), signo (A), signo (B), signo (C)
@@ -13,19 +38,32 @@ int segundoGrado(double a_p, double b_p, double c_p, char a_s, char b_s, char c_
   // cout << c_p << "\n";
 
   // Eliminación del signo en caso de ser negativo (Evitamos repeticion)
-  if(a_s=='-'){a_s=NULL;}
-  if(b_s=='-'){b_s=NULL;}
-  if(c_s=='-'){c_s=NULL;}
+  if (a_s == '-') {
+    a_s = NULL;
+  }
+  if (b_s == '-') {
+    b_s = NULL;
+  }
+  if (c_s == '-') {
+    c_s = NULL;
+  }
 
   // Mostramos por consola la ecuacion
-  cout << "Ecuacion: " <<a_s<<a_p<<"x^2"<<b_s<<b_p<<"x"<<c_s<<c_p<<endl; 
-  double res1 = -(b_p) + (sqrt((pow(b_p,2))-((4*a_p)*c_p)));
-  res1 = (res1)/(2*a_p);
-  double res2 = -(b_p) - (sqrt((pow(b_p,2))-((4*a_p)*c_p)));
-  res2 = (res2)/(2*a_p);
-  cout << "------------"<< endl;
-  cout << "R1: " << res1 << endl;
-  cout << "R2: " << res2 << endl;
+  cout << "Ecuacion: " << a_s << a_p << "x^2" << b_s << b_p << "x" << c_s << c_p << endl;
+  double res1 = -(b_p) + (sqrt((pow(b_p, 2)) - ((4 * a_p) * c_p)));
+  res1 = (res1) / (2 * a_p);
+  double res2 = -(b_p) - (sqrt((pow(b_p, 2)) - ((4 * a_p) * c_p)));
+  res2 = (res2) / (2 * a_p);
+
+  if(isnan(res1) || isnan(res2)){
+    cout<< "Solucion indeterminada para X" << endl;
+  }else{
+    cout << "------------" << endl;
+    cout << "X1: " << res1 << endl;
+    cout << "X2: " << res2 << endl;
+  }
+
+
 }
 
 char extr_signo(string cadena) {
@@ -75,11 +113,73 @@ char extr_signo(string cadena) {
     // el valor de rechazo
     return '!';
   }
+}
 
+void modulo1() {
+  // Puerta de acceso general
+  bool acceso = false;
+  // Bucle de iteracion en caso de ingresar valores erroneos
+  do {
+
+    // Bloque de comportamiento normal
+    try {
+
+      // Variables de ingreso
+      string a, b;
+      // Puerta de acceso para existencia de signos
+      bool acceso_a, acceso_b;
+      // Mensaje de solicitud de ingreso de valor.
+      // Ingreso de valor
+      cout << "Ingresa el valor de 'A': " << endl;
+      cin >> a;
+      // Almacenamos en una variable el signo retornado
+      char sign_a = extr_signo(a);
+      (sign_a == '+' || sign_a == '-') ? acceso_a = true: acceso_a = false;
+      (acceso_a == true) ? sign_a = extr_signo(a): sign_a = '#';
+      // Operador ternario de comprobacion de existencia de signo
+      /*
+          if(extr_signo(a)=='-' || extr_signo(a)=='+'){
+            cout << "GENIAL" << endl ;
+          }else if(extr_signo(a)=='!'){
+            cout << "MAL" << endl;
+          }
+      */
+      cout << "Ingresa el valor de 'B': " << endl;
+      cin >> b;
+      // Almacenamos en una variable el signo retornado
+      char sign_b = extr_signo(b);
+      // Operador ternario de comprobacion de existencia de signo
+      (sign_b == '+' || sign_b == '-') ? acceso_b = true: acceso_b = false;
+      (acceso_b == true) ? sign_b = extr_signo(b): sign_b = '#';
+      
+
+      // Re-asignación de valor (ya en numerico)
+      int a_num = stoi(a);
+      int b_num = stoi(b);
+      //cout << "Valor:" a_num << std::endl;
+      if (acceso_a == true && acceso_b == true) {
+        // Condicional -SI LA CONVERSION A NUMERICO ES CORRECTA-
+        if (0 / a_num == 0 && 0 / b_num == 0) {
+          // LLAMADOS
+          // Llave de fin de bucle
+          acceso = true;
+          // Llamado a la funcion 'segundoGrado' y paso de parametros
+          primerGrado(a_num, b_num, sign_a, sign_b);
+        }
+      } else {
+        // Mensaje de error -NO SE INGRESARON SIGNOS-
+        cout << "INGRESE UN SIGNO POR FAVOR" << endl;
+      }
+
+    } catch (...) { // Bloque excepciC3n (VALOR INGRESADO NO ES NUMERICO)
+      cout << "No se ingresaron valores numericos" << endl;
+    }
+    // Condicional WHILE  
+  } while (acceso == false);
 }
 
 
-int main() {
+void modulo2() {
   // Puerta de acceso general
   bool acceso = false;
   // Bucle de iteracion en caso de ingresar valores erroneos
@@ -99,7 +199,7 @@ int main() {
       // Almacenamos en una variable el signo retornado
       char sign_a = extr_signo(a);
       (sign_a == '+' || sign_a == '-') ? acceso_a = true: acceso_a = false;
-      (acceso_a==true) ? sign_a = extr_signo(a) : sign_a='#';
+      (acceso_a == true) ? sign_a = extr_signo(a): sign_a = '#';
       // Operador ternario de comprobacion de existencia de signo
       /*
           if(extr_signo(a)=='-' || extr_signo(a)=='+'){
@@ -114,7 +214,7 @@ int main() {
       char sign_b = extr_signo(b);
       // Operador ternario de comprobacion de existencia de signo
       (sign_b == '+' || sign_b == '-') ? acceso_b = true: acceso_b = false;
-      (acceso_b==true) ? sign_b = extr_signo(b) : sign_b='#';
+      (acceso_b == true) ? sign_b = extr_signo(b): sign_b = '#';
       cout << "Ingresa el valor de 'C': " << endl;
       cin >> c;
       // Almacenamos en una variable el signo retornado
@@ -122,14 +222,14 @@ int main() {
       // extr_signo(c);
       // Operador ternario de comprobacion de existencia de signo
       (sign_c == '+' || sign_c == '-') ? acceso_c = true: acceso_c = false;
-      (acceso_c==true) ? sign_c = extr_signo(c) : sign_c='#';
+      (acceso_c == true) ? sign_c = extr_signo(c): sign_c = '#';
 
       // Re-asignación de valor (ya en numerico)
       int a_num = stoi(a);
       int b_num = stoi(b);
       int c_num = stoi(c);
       //cout << "Valor:" a_num << std::endl;
-      if (acceso_a == true && acceso_b==true && acceso_c==true) {
+      if (acceso_a == true && acceso_b == true && acceso_c == true) {
         // Condicional -SI LA CONVERSION A NUMERICO ES CORRECTA-
         if (0 / a_num == 0 && 0 / b_num == 0 && 0 / c_num == 0) {
           // LLAMADOS
@@ -138,7 +238,7 @@ int main() {
           // Llamado a la funcion 'segundoGrado' y paso de parametros
           segundoGrado(a_num, b_num, c_num, sign_a, sign_b, sign_c);
         }
-      }else{
+      } else {
         // Mensaje de error -NO SE INGRESARON SIGNOS-
         cout << "INGRESE UN SIGNO POR FAVOR" << endl;
       }
@@ -148,5 +248,43 @@ int main() {
     }
     // Condicional WHILE  
   } while (acceso == false);
+}
+
+
+int main() {
+  int op; //Variable que almacena el número de la opción a elegit
+  bool repetir = true;
+
+  do {
+    system("cls"); //
+
+    //Menú
+    cout << "\n Elige el numero de la opcion" << endl;
+    cout << "1. Ecuaciones de primer grado" << endl;
+    cout << "2. Ecuaciones de segundo grado" << endl;
+    cout << "0. SALIR" << endl;
+
+    cout << "\n Ingrese una opcion: ";
+    cin >> op; //leemos el número de la opción
+
+    switch (op) {
+      case 1:
+        // Instrucciones de la opción 1                
+        cout << "Ecuaciones de primer grado" << endl;
+        modulo1();
+        system("pause>nul"); // Pausa             
+        break;
+
+      case 2:
+        // Instrucciones de la opción 2                
+        cout << "Ecuaciones de segundo grado" << endl;
+        modulo2();
+        system("pause>nul"); // Pausa
+        break;
+      case 0:
+        repetir = false;
+        break;
+    }
+  } while (repetir);
   return 0;
 }

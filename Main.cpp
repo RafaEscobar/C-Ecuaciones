@@ -21,14 +21,14 @@ int primerGrado(double a_p, double b_p, char a_s, char b_s) {
   cout << "Ecuacion: " << a_s << a_p << "x" << b_s << b_p << endl;
   if(a_p != 0){
     double res = (-1*b_p)/(a_p);
-    cout << "Resultado: " << res << endl;
+    printf("%.4f; ", res);
+    // cout << "Resultado: " << res << endl;
   }else if(b_p != 0){
     cout<< "Solucion imposible " << endl;
   }else{
     cout<< "Solucion indeterminada" << endl;
   }
 }
-
 
 // Funcion para la resolucion de una ecuacion de segundo grado
 // Parametros: valor (A), valor (B), valor (C), signo (A), signo (B), signo (C)
@@ -58,12 +58,12 @@ int segundoGrado(double a_p, double b_p, double c_p, char a_s, char b_s, char c_
   if(isnan(res1) || isnan(res2)){
     cout<< "Solucion indeterminada para X" << endl;
   }else{
-    cout << "------------" << endl;
-    cout << "X1: " << res1 << endl;
-    cout << "X2: " << res2 << endl;
+    cout << "----------------------" << endl;
+    cout <<endl<< "X1 = ";
+    printf("%.4f ",res1);
+    cout <<endl<< "X2 = ";
+    printf("%.4f ", res2);
   }
-
-
 }
 
 char extr_signo(string cadena) {
@@ -178,16 +178,13 @@ void modulo1() {
   } while (acceso == false);
 }
 
-
 void modulo2() {
   // Puerta de acceso general
   bool acceso = false;
   // Bucle de iteracion en caso de ingresar valores erroneos
   do {
-
     // Bloque de comportamiento normal
     try {
-
       // Variables de ingreso
       string a, b, c;
       // Puerta de acceso para existencia de signos
@@ -242,7 +239,6 @@ void modulo2() {
         // Mensaje de error -NO SE INGRESARON SIGNOS-
         cout << "INGRESE UN SIGNO POR FAVOR" << endl;
       }
-
     } catch (...) { // Bloque excepciC3n (VALOR INGRESADO NO ES NUMERICO)
       cout << "No se ingresaron valores numericos" << endl;
     }
@@ -259,6 +255,7 @@ int main() {
     system("cls"); //
 
     //Menú
+    cout << "===> Calculadora de ecuaciones <===";
     cout << "\n Elige el numero de la opcion" << endl;
     cout << "1. Ecuaciones de primer grado" << endl;
     cout << "2. Ecuaciones de segundo grado" << endl;
@@ -269,7 +266,8 @@ int main() {
 
     switch (op) {
       case 1:
-        // Instrucciones de la opción 1                
+        // Instrucciones de la opción 1      
+        system("cls");          
         cout << "Ecuaciones de primer grado" << endl;
         modulo1();
         system("pause>nul"); // Pausa             
@@ -277,6 +275,7 @@ int main() {
 
       case 2:
         // Instrucciones de la opción 2                
+        system("cls");
         cout << "Ecuaciones de segundo grado" << endl;
         modulo2();
         system("pause>nul"); // Pausa

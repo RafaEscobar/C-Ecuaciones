@@ -1,5 +1,7 @@
 #include <iostream>
+
 #include <string>
+
 #include <cmath>
 
 using namespace std;
@@ -10,7 +12,7 @@ int primerGrado(double a_p, double b_p, char a_s, char b_s) {
   // cout << a_p << "\n";
   // cout << b_p << "\n";
 
-  // Eliminación del signo en caso de ser negativo (Evitamos repeticion)
+  // Eliminación del signo en cas5o de ser negativo (Evitamos repeticion)
   if (a_s == '-') {
     a_s = NULL;
   }
@@ -19,14 +21,14 @@ int primerGrado(double a_p, double b_p, char a_s, char b_s) {
   }
 
   cout << "Ecuacion: " << a_s << a_p << "x" << b_s << b_p << endl;
-  if(a_p != 0){
-    double res = (-1*b_p)/(a_p);
+  if (a_p != 0) {
+    double res = (-1 * b_p) / (a_p);
     printf("%.4f; ", res);
     // cout << "Resultado: " << res << endl;
-  }else if(b_p != 0){
-    cout<< "Solucion imposible " << endl;
-  }else{
-    cout<< "Solucion indeterminada" << endl;
+  } else if (b_p != 0) {
+    cout << "Solucion imposible " << endl;
+  } else {
+    cout << "Solucion indeterminada" << endl;
   }
 }
 
@@ -55,13 +57,13 @@ int segundoGrado(double a_p, double b_p, double c_p, char a_s, char b_s, char c_
   double res2 = -(b_p) - (sqrt((pow(b_p, 2)) - ((4 * a_p) * c_p)));
   res2 = (res2) / (2 * a_p);
 
-  if(isnan(res1) || isnan(res2)){
-    cout<< "Solucion indeterminada para X" << endl;
-  }else{
+  if (isnan(res1) || isnan(res2)) {
+    cout << "Solucion indeterminada para X" << endl;
+  } else {
     cout << "----------------------" << endl;
-    cout <<endl<< "X1 = ";
-    printf("%.4f ",res1);
-    cout <<endl<< "X2 = ";
+    cout << endl << "X1 = ";
+    printf("%.4f ", res1);
+    cout << endl << "X2 = ";
     printf("%.4f ", res2);
   }
 }
@@ -130,6 +132,7 @@ void modulo1() {
       bool acceso_a, acceso_b;
       // Mensaje de solicitud de ingreso de valor.
       // Ingreso de valor
+      cout << "===> Ecuaciones de primer grado <===" << endl;
       cout << "Ingresa el valor de 'A': " << endl;
       cin >> a;
       // Almacenamos en una variable el signo retornado
@@ -151,7 +154,7 @@ void modulo1() {
       // Operador ternario de comprobacion de existencia de signo
       (sign_b == '+' || sign_b == '-') ? acceso_b = true: acceso_b = false;
       (acceso_b == true) ? sign_b = extr_signo(b): sign_b = '#';
-      
+
 
       // Re-asignación de valor (ya en numerico)
       int a_num = stoi(a);
@@ -191,6 +194,7 @@ void modulo2() {
       bool acceso_a, acceso_b, acceso_c;
       // Mensaje de solicitud de ingreso de valor.
       // Ingreso de valor
+      cout << "===> Ecuaciones de segundo grado <===" << endl;
       cout << "Ingresa el valor de 'A': " << endl;
       cin >> a;
       // Almacenamos en una variable el signo retornado
@@ -247,43 +251,149 @@ void modulo2() {
 }
 
 
-int main() {
-  int op; //Variable que almacena el número de la opción a elegit
-  bool repetir = true;
+bool sesion() {
+  
+  // Variables de ingreso
+  string user, contra;   
+  // Puerta de acceso (don't move) 
+  bool exit = false;
+  // Contadores (con't move)
+  int cont1, cont2, cont=0;
+  // Registros
+  string users[3] = {
+    "alin",
+    "abril",
+    "rafael"
+  };
+  string contras[3] = {
+    "123fr",
+    "jg6rLg",
+    "1234"
+  };
 
   do {
-    system("cls"); //
+    // Reinicializadas
+    exit=false;
+    cont1 = 0; cont2 = 0;
 
-    //Menú
-    cout << "===> Calculadora de ecuaciones <===";
-    cout << "\n Elige el numero de la opcion" << endl;
-    cout << "1. Ecuaciones de primer grado" << endl;
-    cout << "2. Ecuaciones de segundo grado" << endl;
-    cout << "0. SALIR" << endl;
+    cout << "===> Calculadora de ecuaciones <===" << endl;;
+    cout << "Ingresa tu nombre de usuario:" << endl;
+    cin >> user;
+    cout << "Ingresa tu contraseña:" << endl;
+    cin >> contra;
 
-    cout << "\n Ingrese una opcion: ";
-    cin >> op; //leemos el número de la opción
+      for (int i = 0; i < 3; i++) {
+        cont1++;
+        if (users[i] == user) {
+          cout << "Registro encontrado: " << users[i] << endl;
+          exit=false;
+          i = 3;
+        } else {
+          // cout << "--user--";
+          exit=true;
+        }
+      }
+      // cout << "Contador: " << cont1 << endl;
 
-    switch (op) {
-      case 1:
-        // Instrucciones de la opción 1      
-        system("cls");          
-        cout << "Ecuaciones de primer grado" << endl;
-        modulo1();
-        system("pause>nul"); // Pausa             
-        break;
+      for (int j = 0; j < 3; j++) {
+        cont2++;
+        if (contras[j] == contra) {
+          cout << "Registro encontrado: " << contras[j] << endl;
+          exit=false;
+          j = 3;
+        } else {
+          // cout << "--contra--";
+          exit=true;
+        }
+      }
+      // cout << "Contador: " << cont2 << endl;
 
-      case 2:
-        // Instrucciones de la opción 2                
-        system("cls");
-        cout << "Ecuaciones de segundo grado" << endl;
-        modulo2();
-        system("pause>nul"); // Pausa
-        break;
-      case 0:
-        repetir = false;
-        break;
+
+      // if (cont1 != cont2) {
+      //   exit = true;
+      // }
+
+    // cout << "<" << exit << ">" << endl;
+
+    if (exit==false) {
+      cout << "aqui" << endl;
+      cont = 3;
+    }else{
+      cont++;
     }
-  } while (repetir);
+    cout << "<" << exit << ">" << endl;
+  } while (cont != 3);
+
+  
+  return exit;
+
+}
+
+int main() {
+  int op; //Variable que almacena el número de la opción a elegit
+  bool repetir = true, sesion_p=false;
+  int exit;
+
+  sesion_p=sesion();
+
+  cout << "obtenido: " << sesion_p << endl;
+  /*
+    if (sesion_p == false) {
+
+      do {
+        system("cls");
+        // Bloque de comportamiento normal
+        try {
+          string opc;
+          //Menú
+          cout << "===> Calculadora de ecuaciones <===";
+          cout << "\n Elige el numero de la opcion" << endl;
+          cout << "1. Ecuaciones de primer grado" << endl;
+          cout << "2. Ecuaciones de segundo grado" << endl;
+          cout << "0. Salir" << endl;
+
+          cout << "\n Ingrese una opcion: ";
+          cin >> opc; //leemos el número de la opción
+          // Leemos como string y convertimos a numerico para control de excepción
+          op = stoi(opc);
+          switch (op) {
+            case 1:
+              // Instrucciones de la opción 1      
+              system("cls");
+              // Llamado al modulo real, restringido
+              modulo1();
+              system("pause>nul"); // Pausa             
+              break;
+
+            case 2:
+              // Instrucciones de la opción 2                
+              system("cls");
+              // Llamado al modulo real, restringido
+              modulo2();
+              system("pause>nul"); // Pausa
+              break;
+            case 0:
+              system("cls");
+              cout << "Esta seguro de que deseas salir?" << endl;
+              cout << "1. Si" << endl << "2. No" << endl;
+              cin >> exit;
+              if (exit == 1) {
+                repetir = false;
+              }
+              break;
+          }
+        } catch (...) {
+          // Si sucede la excepción
+          cout << "Por favor ingrese una opción correcta";
+        }
+      } while (repetir);
+      system("cls");
+      cout << "Gracias por su preferencia!!!!" << endl;
+      cout << "___ RONA PROJECTS ___" << endl;
+    } else {
+      system("cls");
+      cout << "ERROR AL INICIAR SESION" << endl << "> Valide sus cedenciales" << endl;
+    }
+  */
   return 0;
 }
